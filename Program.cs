@@ -22,7 +22,7 @@ namespace VSKeyExtractor
 
     class Program
     {
-        static readonly List<Product> Products = new()
+        static readonly List<Product> Products = new List<Product>
         {
             new Product("Visual Studio 2015 Enterprise"       , "4D8CFBCB-2F6A-4AD2-BABF-10E28F6F2C8F", "07060"),
             new Product("Visual Studio 2015 Professional"     , "4D8CFBCB-2F6A-4AD2-BABF-10E28F6F2C8F", "07062"),
