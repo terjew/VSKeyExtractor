@@ -33,6 +33,9 @@ namespace VSKeyExtractor
 
             new Product("Visual Studio 2019 Enterprise"       , "41717607-F34E-432C-A138-A3CFD7E25CDA", "09260"),
             new Product("Visual Studio 2019 Professional"     , "41717607-F34E-432C-A138-A3CFD7E25CDA", "09262"),
+
+            new Product("Visual Studio 2022 Enterprise"       , "1299B4B9-DFCC-476D-98F0-F65A2B46C96D", "09660"),
+            new Product("Visual Studio 2022 Professional"     , "1299B4B9-DFCC-476D-98F0-F65A2B46C96D", "09662"),
         };
 
         static void Main()
