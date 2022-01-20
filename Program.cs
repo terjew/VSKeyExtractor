@@ -59,6 +59,7 @@ namespace VSKeyExtractor
                     if (match.Success)
                     {
                         Console.WriteLine($"Found key for {product.Name}: {match.Captures[0]}");
+                        TxtFile("Found key for", product.Name, match.Captures[0].ToString());
                     }
                 }
             }
