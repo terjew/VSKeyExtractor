@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.IO;
 
 namespace VSKeyExtractor
 {
@@ -62,6 +63,33 @@ namespace VSKeyExtractor
                 }
             }
             catch (Exception) { }
+        }
+
+        static private string GenerateFullFilePath(string ProductVS)
+        {
+            string fileName = "";
+            string fileNameExtension = ".txt";
+            string license = "License";
+
+            //Create desktop path
+            string localDesktop = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            //Concate the full path
+            fileName = localDesktop + "\\" + ProductVS + " " + license + fileNameExtension;
+
+            return fileName;
+        }
+
+
+        static public void TxtFile(string header, string ProductVS, string key)
+        {
+            StringBuilder getData = new StringBuilder();
+
+            string path = GenerateFullFilePath(ProductVS);
+
+            getData.Append(header + " " + ProductVS + ": " + key);
+
+            File.WriteAllText(path, getData.ToString());
         }
     }
 }
