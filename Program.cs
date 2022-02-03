@@ -5,6 +5,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace VSKeyExtractor
 {
@@ -39,6 +41,7 @@ namespace VSKeyExtractor
             new Product("Visual Studio 2022 Professional"     , "1299B4B9-DFCC-476D-98F0-F65A2B46C96D", "09662"),
         };
 
+        [STAThread]
         static void Main()
         {
             foreach (var product in Products) ExtractLicense(product);
@@ -66,31 +69,57 @@ namespace VSKeyExtractor
             catch (Exception) { }
         }
 
-        static private string GenerateFullFilePath(string ProductVS)
+        private static string ChoosePath()
+        {
+            bool anyPath = false;
+            string path = "";
+
+            try
+            {
+                FolderBrowserDialog dialogExplorer = new FolderBrowserDialog();
+                dialogExplorer.ShowNewFolderButton = false;
+
+                DialogResult result = dialogExplorer.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    path = dialogExplorer.SelectedPath;
+                    anyPath = true;
+
+                    dialogExplorer.RootFolder = Environment.SpecialFolder.Desktop;
+                }
+            }
+            catch (Exception error)
+            {
+                Console.WriteLine(error.Message, "Error in Choose directory");
+            }
+
+            return path;
+        }
+
+        static private string GenerateFileName(string ProductVS)
         {
             string fileName = "";
             string fileNameExtension = ".txt";
             string license = "License";
 
-            //Create desktop path
-            string localDesktop = System.Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-            //Concate the full path
-            fileName = localDesktop + "\\" + ProductVS + " " + license + fileNameExtension;
+            //Create the name
+            fileName =  ProductVS + " " + license + fileNameExtension;
 
             return fileName;
         }
-
 
         static public void TxtFile(string header, string ProductVS, string key)
         {
             StringBuilder getData = new StringBuilder();
 
-            string path = GenerateFullFilePath(ProductVS);
+            string fileName = GenerateFileName(ProductVS);
 
-            getData.Append(header + " " + ProductVS + ": " + key);
+            string rootPath = ChoosePath();
+            string fullFilePath = rootPath + "\\" + fileName;
 
-            File.WriteAllText(path, getData.ToString());
+            getData.Append(header + " " + ProductVS + ": " + key + "\n");
+            
+            File.AppendAllText(fullFilePath, getData.ToString());
         }
     }
 }
