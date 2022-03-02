@@ -5,8 +5,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.IO;
-using System.Threading;
-using System.Windows.Forms;
 
 namespace VSKeyExtractor
 {
@@ -62,38 +60,30 @@ namespace VSKeyExtractor
                     if (match.Success)
                     {
                         Console.WriteLine($"Found key for {product.Name}: {match.Captures[0]}");
-                        TxtFile("Found key for", product.Name, match.Captures[0].ToString());
+                        Console.WriteLine("\nDo you want to save it? (Yes/No)");
+                        string chooseIfSave = "";
+
+                        chooseIfSave = Console.ReadLine();
+
+                        if (chooseIfSave == "Y" || chooseIfSave == "yes" || chooseIfSave == "Yes")
+                        {
+                            TxtFile("Found key for", product.Name, match.Captures[0].ToString());
+                        }
+                        if (chooseIfSave == "N" || chooseIfSave == "no" || chooseIfSave == "No")
+                        {
+                            Console.Clear();
+                        }
                     }
                 }
             }
             catch (Exception) { }
         }
 
-        private static string ChoosePath()
+        private static void ChoosePath(out string path)
         {
-            bool anyPath = false;
-            string path = "";
-
-            try
-            {
-                FolderBrowserDialog dialogExplorer = new FolderBrowserDialog();
-                dialogExplorer.ShowNewFolderButton = false;
-
-                DialogResult result = dialogExplorer.ShowDialog();
-                if (result == DialogResult.OK)
-                {
-                    path = dialogExplorer.SelectedPath;
-                    anyPath = true;
-
-                    dialogExplorer.RootFolder = Environment.SpecialFolder.Desktop;
-                }
-            }
-            catch (Exception error)
-            {
-                Console.WriteLine(error.Message, "Error in Choose directory");
-            }
-
-            return path;
+            path = "";
+            Console.WriteLine("\nPlease type the directory where you want to save the product key: ");
+            path = Console.ReadLine();
         }
 
         static private string GenerateFileName(string ProductVS)
@@ -113,9 +103,11 @@ namespace VSKeyExtractor
             StringBuilder getData = new StringBuilder();
 
             string fileName = GenerateFileName(ProductVS);
+            string path;
 
-            string rootPath = ChoosePath();
-            string fullFilePath = rootPath + "\\" + fileName;
+            ChoosePath(out path);
+
+            string fullFilePath = path + "\\" + fileName;
 
             getData.Append(header + " " + ProductVS + ": " + key + "\n");
             
@@ -123,4 +115,3 @@ namespace VSKeyExtractor
         }
     }
 }
-
