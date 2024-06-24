@@ -32,6 +32,7 @@ namespace VSKeyExtractor
             new Product("Visual Studio Express 2012 for Windows Desktop", "77550D6B-6352-4E77-9DA3-537419DF564B", "05695"),
 
             new Product("Visual Studio 2013 Professional"               , "E79B3F9C-6543-4897-BBA5-5BFB0A02BB5C", "06177"),
+            new Product("Visual Studio 2013 Ultimate"		            , "E79B3F9C-6543-4897-BBA5-5BFB0A02BB5C", "06181"),
             
             new Product("Visual Studio 2015 Enterprise"                 , "4D8CFBCB-2F6A-4AD2-BABF-10E28F6F2C8F", "07060"),
             new Product("Visual Studio 2015 Professional"               , "4D8CFBCB-2F6A-4AD2-BABF-10E28F6F2C8F", "07062"),
