@@ -7,18 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace VSKeyExtractor
 {
-    struct Product
-    {
-        public string Name { get; }
-        public string GUID { get; }
-        public string MPC { get; }
-        public Product(string Name, string GUID, string MPC)
-        {
-            this.Name = Name;
-            this.GUID = GUID;
-            this.MPC = MPC;
-        }
-    }
+    record Product(string Name, string GUID, string MPC);
 
     class Program
     {
@@ -71,7 +60,7 @@ namespace VSKeyExtractor
                     }
                 }
             }
-            catch (Exception) { }
+            catch (Exception) {/*just void em*/}
         }
     }
 }
