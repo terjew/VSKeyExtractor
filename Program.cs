@@ -23,7 +23,7 @@ namespace VSKeyExtractor
 
     class Program
     {
-        private static readonly List<Product> products = new List<Product>()
+        private static readonly IReadOnlyList<Product> Products = new List<Product>()
         {
             new Product("Visual Studio Express 2012 for Windows Phone"  , new Guid("77550D6B-6352-4E77-9DA3-537419DF564B"), "04937"),
             new Product("Visual Studio Professional 2012"               , new Guid("77550D6B-6352-4E77-9DA3-537419DF564B"), "04938"),
@@ -48,14 +48,13 @@ namespace VSKeyExtractor
             new Product("Visual Studio 2022 Enterprise"                 , new Guid("1299B4B9-DFCC-476D-98F0-F65A2B46C96D"), "09660"),
             new Product("Visual Studio 2022 Professional"               , new Guid("1299B4B9-DFCC-476D-98F0-F65A2B46C96D"), "09662"),
 
-            new Product("Visual Studio 2026 Enterprise Insider"  , new Guid("0EB1B2EC-090C-4540-B219-F529C658360C"), "09760"),
-            new Product("Visual Studio 2026 Professional Insider", new Guid("0EB1B2EC-090C-4540-B219-F529C658360C"), "09762"),
+            new Product("Visual Studio 2026 Enterprise Insider"         , new Guid("0EB1B2EC-090C-4540-B219-F529C658360C"), "09760"),
+            new Product("Visual Studio 2026 Professional Insider"       , new Guid("0EB1B2EC-090C-4540-B219-F529C658360C"), "09762"),
 
-            new Product("Visual Studio 2026 Enterprise"       , new Guid("97372B8F-5B80-4DA7-8476-FF55D6368CBD"), "09860"),
-            new Product("Visual Studio 2026 Professional"     , new Guid("97372B8F-5B80-4DA7-8476-FF55D6368CBD"), "09862"),
+            new Product("Visual Studio 2026 Enterprise"                 , new Guid("97372B8F-5B80-4DA7-8476-FF55D6368CBD"), "09860"),
+            new Product("Visual Studio 2026 Professional"               , new Guid("97372B8F-5B80-4DA7-8476-FF55D6368CBD"), "09862"),
 
         };
-        static readonly List<Product> Products = products;
 
         static void Main()
         {
